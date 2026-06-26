@@ -2,16 +2,12 @@ services:
   - type: web
     name: cloud-24-7
     runtime: node
-    plan: starter
+    plan: free
     region: singapore
     buildCommand: npm ci
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeployTrigger: commit
-    disk:
-      name: cloud-24-7-data
-      mountPath: /var/data
-      sizeGB: 10
     envVars:
       - key: NODE_ENV
         value: production
@@ -20,11 +16,11 @@ services:
       - key: HOST
         value: 0.0.0.0
       - key: STORAGE_PATH
-        value: /var/data/storage
+        value: /tmp/cloud-24-7/storage
       - key: USERS_DB_PATH
-        value: /var/data/data/users.json
+        value: /tmp/cloud-24-7/data/users.json
       - key: SESSION_DIR
-        value: /var/data/sessions
+        value: /tmp/cloud-24-7/sessions
       - key: TRUST_PROXY
         value: "1"
       - key: COOKIE_SECURE

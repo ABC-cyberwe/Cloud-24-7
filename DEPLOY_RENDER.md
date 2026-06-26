@@ -5,7 +5,7 @@ This project is a Node/Express web app, so use Render Web Service, not Static Si
 The repo includes `render.yaml`, which creates:
 
 - One Node web service
-- One 10 GB persistent disk mounted at `/var/data`
+- Free-plan ephemeral storage under `/tmp/cloud-24-7`
 - HTTPS-safe session cookie settings
 - Health checks at `/api/health`
 - Automatic redeploys on each pushed commit
@@ -25,7 +25,7 @@ Cloud 24/7 stores users and files on the filesystem:
 - Uploaded files: `storage/users/`
 - Sessions: `sessions/`
 
-Render free web services use an ephemeral filesystem, so local file changes can disappear after deploys, restarts, and idle spin-downs. The included blueprint uses a paid `starter` service with a persistent disk so uploads and users survive restarts.
+Render free web services use an ephemeral filesystem, so local file changes can disappear after deploys, restarts, and idle spin-downs. The included blueprint uses the free plan, so treat it as a no-cost demo unless you later add persistent storage.
 
 ## Prepare Admin Password
 
@@ -84,13 +84,15 @@ HOST=0.0.0.0
 TRUST_PROXY=1
 ```
 
-Turn on signups only if you are ready for public users to upload files to your paid disk.
+Turn on signups only if you are ready for public users to upload files to an ephemeral free service.
 
 ## Existing Local Data
 
 Your local `.env`, `data/users.json`, `storage/`, `sessions/`, and `logs/` are intentionally ignored by Git.
 
-That means the first Render deploy starts with a fresh users database and empty storage. To move existing users/files later, transfer them into the Render persistent disk paths:
+That means the first Render deploy starts with a fresh users database and empty storage. Free Render storage is ephemeral, so existing local data should not be moved there unless you only need a short-lived demo.
+
+If you later upgrade to paid persistent storage, use these disk-backed paths:
 
 ```text
 /var/data/data/users.json
@@ -99,8 +101,15 @@ That means the first Render deploy starts with a fresh users database and empty 
 
 Use Render Shell/SCP or another secure transfer method after the service is deployed.
 
-## Free Demo Alternative
+## Persistent Storage Upgrade
 
-For a temporary demo only, you can change `plan: starter` to `plan: free` and remove the `disk:` block from `render.yaml`.
+For real storage, change `plan: free` to a paid plan such as `starter`, add this block to `render.yaml`, and switch the storage env vars back to `/var/data`:
 
-Do not use that for real storage: uploaded files and local user data can be lost.
+```yaml
+disk:
+  name: cloud-24-7-data
+  mountPath: /var/data
+  sizeGB: 10
+```
+
+Do not use the free setup for permanent file storage: uploaded files and local user data can be lost.
