@@ -1,0 +1,10 @@
+node_modules/
+.env
+data/*
+!data/.keep
+storage/*
+!storage/.keep
+sessions/*
+!sessions/.keep
+logs/
+npm-debug.log*

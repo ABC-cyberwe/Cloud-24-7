@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: cloud-24-7
+    runtime: node
+    plan: starter
+    region: singapore
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    disk:
+      name: cloud-24-7-data
+      mountPath: /var/data
+      sizeGB: 10
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_NAME
+        value: Cloud 24/7
+      - key: HOST
+        value: 0.0.0.0
+      - key: STORAGE_PATH
+        value: /var/data/storage
+      - key: USERS_DB_PATH
+        value: /var/data/data/users.json
+      - key: SESSION_DIR
+        value: /var/data/sessions
+      - key: TRUST_PROXY
+        value: "1"
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: ALLOW_SIGNUPS
+        value: "false"
+      - key: ALLOW_DELETE
+        value: "false"
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_QUOTA_BYTES
+        value: unlimited
+      - key: DEFAULT_USER_QUOTA_BYTES
+        value: "5368709120"
+      - key: MAX_UPLOAD_BYTES
+        value: "2147483648"
+      - key: MAX_FILES_PER_UPLOAD
+        value: "25"
+      - key: REQUEST_TIMEOUT_MS
+        value: "1800000"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_PASSWORD_HASH
+        sync: false

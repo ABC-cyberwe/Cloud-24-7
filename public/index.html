@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cloud 24/7</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section id="authView" class="auth-panel" hidden>
+        <div class="brand">
+          <span class="brand-mark">C24</span>
+          <div>
+            <h1>Cloud 24/7</h1>
+            <p>Storage accounts hosted on this machine.</p>
+          </div>
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="Account access">
+          <button id="loginTab" type="button" class="active">Sign in</button>
+          <button id="signupTab" type="button">Create account</button>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+          <label>
+            Username
+            <input id="loginUsername" name="username" autocomplete="username" required>
+          </label>
+          <label>
+            Password
+            <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
+          </label>
+          <button type="submit">Sign in</button>
+        </form>
+
+        <form id="signupForm" class="auth-form" hidden>
+          <label>
+            Username
+            <input id="signupUsername" name="username" autocomplete="username" required>
+          </label>
+          <label>
+            Password
+            <input id="signupPassword" name="password" type="password" autocomplete="new-password" required>
+          </label>
+          <label>
+            Confirm password
+            <input id="signupPasswordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" required>
+          </label>
+          <button type="submit">Create free account</button>
+        </form>
+
+        <p id="authMessage" class="message" role="alert"></p>
+      </section>
+
+      <section id="appView" class="drive" hidden>
+        <header class="topbar">
+          <div class="title-block">
+            <h1>Cloud 24/7</h1>
+            <p id="pathLabel">/</p>
+          </div>
+          <div class="account-block">
+            <span id="accountLabel"></span>
+            <div class="usage">
+              <div class="usage-track">
+                <span id="usageFill"></span>
+              </div>
+              <small id="usageLabel"></small>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="newFolderButton" type="button">New Folder</button>
+            <button id="uploadButton" type="button">Upload</button>
+            <button id="refreshButton" type="button">Refresh</button>
+            <button id="adminButton" type="button" hidden>Admin</button>
+            <button id="logoutButton" type="button">Logout</button>
+          </div>
+        </header>
+
+        <nav id="breadcrumbs" class="breadcrumbs" aria-label="Current folder"></nav>
+
+        <input id="fileInput" type="file" multiple hidden>
+
+        <section class="file-panel">
+          <div class="file-header">
+            <span>Name</span>
+            <span>Size</span>
+            <span>Modified</span>
+            <span>Actions</span>
+          </div>
+          <div id="fileList" class="file-list"></div>
+          <div id="emptyState" class="empty-state" hidden>No files here yet.</div>
+        </section>
+
+        <section id="adminPanel" class="admin-panel" hidden>
+          <div class="admin-title">
+            <h2>Admin</h2>
+            <button id="closeAdminButton" type="button">Close</button>
+          </div>
+          <div class="admin-table">
+            <div class="admin-header">
+              <span>Account</span>
+              <span>Storage</span>
+              <span>Quota</span>
+              <span>Password</span>
+              <span>Status</span>
+            </div>
+            <div id="adminUserList" class="admin-user-list"></div>
+          </div>
+          <p id="adminMessage" class="message" role="status"></p>
+        </section>
+
+        <p id="appMessage" class="message" role="status"></p>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

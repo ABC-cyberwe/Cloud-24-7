@@ -1,0 +1,26 @@
+{
+  "name": "cloud-24-7",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Multi-user browser cloud storage hosted on this laptop.",
+  "main": "src/server.js",
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "hash-password": "node scripts/hash-password.js",
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "multer": "^2.0.0",
+    "session-file-store": "^1.5.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
