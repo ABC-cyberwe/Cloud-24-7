@@ -77,14 +77,14 @@ https://cloud-24-7.onrender.com
 The Render deployment sets:
 
 ```text
-ALLOW_SIGNUPS=false
+ALLOW_SIGNUPS=true
 ALLOW_DELETE=false
 COOKIE_SECURE=true
 HOST=0.0.0.0
 TRUST_PROXY=1
 ```
 
-Turn on signups only if you are ready for public users to upload files to an ephemeral free service.
+Signups are enabled so visitors can choose either sign in or create account on the first screen.
 
 ## Existing Local Data
 

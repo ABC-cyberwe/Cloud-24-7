@@ -26,7 +26,7 @@ services:
       - key: COOKIE_SECURE
         value: "true"
       - key: ALLOW_SIGNUPS
-        value: "false"
+        value: "true"
       - key: ALLOW_DELETE
         value: "false"
       - key: ADMIN_USERNAME

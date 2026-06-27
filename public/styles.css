@@ -1,15 +1,19 @@
 :root {
-  color-scheme: light;
-  --bg: #f4f7fb;
-  --panel: #ffffff;
-  --text: #162235;
-  --muted: #657289;
-  --line: #dce4ef;
-  --primary: #126f82;
-  --primary-dark: #0b5868;
-  --accent: #7a4d18;
-  --danger: #a33636;
-  --shadow: 0 18px 42px rgba(21, 32, 51, 0.12);
+  color-scheme: dark;
+  --bg: #07080d;
+  --bg-2: #0d111a;
+  --panel: #111620;
+  --panel-2: #151c28;
+  --text: #edf4ff;
+  --muted: #8c99ad;
+  --line: #263244;
+  --line-strong: #38475f;
+  --primary: #18c8a8;
+  --primary-dark: #0da486;
+  --accent: #e3b341;
+  --violet: #8e6ff7;
+  --danger: #ff6b7a;
+  --shadow: 0 22px 60px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -19,9 +23,24 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg);
+  background:
+    linear-gradient(135deg, rgba(24, 200, 168, 0.08), transparent 32%),
+    linear-gradient(225deg, rgba(227, 179, 65, 0.07), transparent 30%),
+    var(--bg);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  content: "";
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 80%);
 }
 
 button,
@@ -32,16 +51,17 @@ input {
 button,
 a,
 input {
-  border-radius: 7px;
+  border-radius: 8px;
 }
 
 button {
+  min-height: 38px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: #151b26;
   color: var(--text);
   cursor: pointer;
-  min-height: 38px;
   padding: 0 14px;
+  transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
 }
 
 button:hover,
@@ -49,58 +69,76 @@ a:hover {
   border-color: var(--primary);
 }
 
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid rgba(24, 200, 168, 0.85);
+  outline-offset: 2px;
+}
+
 a {
   display: inline-flex;
-  align-items: center;
   min-height: 34px;
-  border: 1px solid var(--line);
-  color: var(--primary-dark);
+  align-items: center;
+  border: 1px solid rgba(24, 200, 168, 0.35);
+  background: rgba(24, 200, 168, 0.08);
+  color: #7ff2dd;
   padding: 0 12px;
   text-decoration: none;
 }
 
 .shell {
-  width: min(1120px, calc(100vw - 32px));
+  width: min(1160px, calc(100vw - 32px));
   margin: 0 auto;
-  padding: 32px 0;
+  padding: 34px 0;
 }
 
 .auth-panel {
-  width: min(480px, 100%);
+  width: min(460px, 100%);
   margin: 8vh auto 0;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(17, 22, 32, 0.92);
   box-shadow: var(--shadow);
+  border-radius: 8px;
   padding: 28px;
+  backdrop-filter: blur(18px);
 }
 
 .brand {
   display: flex;
-  gap: 16px;
   align-items: center;
-  margin-bottom: 22px;
+  gap: 15px;
+  margin-bottom: 24px;
 }
 
 .brand-mark {
   display: grid;
+  width: 56px;
+  height: 56px;
   place-items: center;
-  width: 54px;
-  height: 54px;
-  border-radius: 8px;
-  background: var(--primary);
-  color: white;
-  font-weight: 700;
+  border: 1px solid rgba(24, 200, 168, 0.45);
+  background: linear-gradient(145deg, rgba(24, 200, 168, 0.92), rgba(142, 111, 247, 0.88));
+  color: #07100e;
+  font-weight: 800;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
 }
 
 h1 {
-  margin: 0;
   font-size: 25px;
   letter-spacing: 0;
 }
 
 p {
-  margin: 7px 0 0;
+  margin-top: 7px;
   color: var(--muted);
 }
 
@@ -109,16 +147,22 @@ p {
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-bottom: 18px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  background: #0c1119;
+  border-radius: 8px;
 }
 
 .auth-tabs button {
-  background: #f6f8fb;
+  border-color: transparent;
+  background: transparent;
+  color: var(--muted);
 }
 
 .auth-tabs button.active {
-  border-color: var(--primary);
-  background: #e4f3f1;
-  color: var(--primary-dark);
+  border-color: rgba(24, 200, 168, 0.4);
+  background: linear-gradient(135deg, rgba(24, 200, 168, 0.22), rgba(142, 111, 247, 0.18));
+  color: var(--text);
   font-weight: 700;
 }
 
@@ -130,43 +174,52 @@ p {
 label {
   display: grid;
   gap: 7px;
-  color: var(--muted);
+  color: #b8c3d4;
+  font-size: 14px;
 }
 
 input {
   width: 100%;
-  min-height: 42px;
+  min-height: 44px;
   border: 1px solid var(--line);
-  padding: 0 12px;
+  background: #090d14;
   color: var(--text);
+  padding: 0 12px;
+}
+
+input::placeholder {
+  color: #657185;
 }
 
 .auth-form button,
 #uploadButton {
-  border-color: var(--primary);
-  background: var(--primary);
-  color: #fff;
+  border-color: rgba(24, 200, 168, 0.65);
+  background: linear-gradient(135deg, var(--primary), #60dfc6);
+  color: #06100e;
+  font-weight: 800;
 }
 
 .auth-form button:hover,
 #uploadButton:hover {
-  background: var(--primary-dark);
+  background: linear-gradient(135deg, #42dfc5, var(--primary-dark));
 }
 
 .drive {
   display: grid;
-  gap: 16px;
+  gap: 14px;
 }
 
 .topbar {
   display: grid;
-  grid-template-columns: minmax(180px, 1fr) minmax(220px, 280px) auto;
+  grid-template-columns: minmax(170px, 1fr) minmax(220px, 280px) auto;
   align-items: center;
-  gap: 16px;
-  background: var(--panel);
+  gap: 14px;
   border: 1px solid var(--line);
+  background: rgba(17, 22, 32, 0.92);
+  box-shadow: 0 14px 42px rgba(0, 0, 0, 0.28);
   border-radius: 8px;
-  padding: 18px;
+  padding: 14px;
+  backdrop-filter: blur(16px);
 }
 
 .title-block {
@@ -174,7 +227,15 @@ input {
 }
 
 .title-block p {
+  display: inline-flex;
+  max-width: 100%;
+  min-height: 38px;
+  align-items: center;
   overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0c1119;
+  color: #dce7f5;
+  padding: 0 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -187,7 +248,7 @@ input {
 #accountLabel {
   overflow: hidden;
   color: var(--text);
-  font-weight: 700;
+  font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -200,15 +261,16 @@ input {
 .usage-track {
   overflow: hidden;
   height: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #080c12;
   border-radius: 999px;
-  background: #e7ecf3;
 }
 
 .usage-track span {
   display: block;
   width: 0;
   height: 100%;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--primary), var(--accent));
   transition: width 160ms ease;
 }
 
@@ -219,8 +281,12 @@ input {
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
   justify-content: flex-end;
+  gap: 8px;
+}
+
+.actions button {
+  background: #0c1119;
 }
 
 .breadcrumbs {
@@ -233,14 +299,16 @@ input {
 
 .breadcrumbs button {
   min-height: 32px;
+  background: rgba(21, 28, 40, 0.86);
   padding: 0 10px;
 }
 
 .file-panel,
 .admin-panel {
   overflow: hidden;
-  background: var(--panel);
   border: 1px solid var(--line);
+  background: rgba(17, 22, 32, 0.94);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
   border-radius: 8px;
 }
 
@@ -248,19 +316,27 @@ input {
 .file-row {
   display: grid;
   grid-template-columns: minmax(180px, 1fr) 120px 190px 170px;
-  gap: 12px;
+  min-height: 56px;
   align-items: center;
-  min-height: 54px;
-  padding: 0 16px;
+  gap: 12px;
   border-bottom: 1px solid var(--line);
+  padding: 0 16px;
 }
 
 .file-header {
   min-height: 44px;
-  background: #edf2f8;
-  color: var(--muted);
+  background: #0b1018;
+  color: #9ba8bb;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
+}
+
+.file-row {
+  color: #d9e2ef;
+}
+
+.file-row:hover {
+  background: rgba(24, 200, 168, 0.05);
 }
 
 .file-row:last-child {
@@ -271,21 +347,25 @@ input {
   justify-self: start;
   max-width: 100%;
   min-width: 0;
+  overflow: hidden;
   border: 0;
   background: transparent;
-  padding: 0;
-  overflow: hidden;
   color: var(--text);
+  padding: 0;
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.name-cell:hover {
+  color: #7ff2dd;
+}
+
 .row-actions {
   display: flex;
-  gap: 8px;
   align-items: center;
   justify-content: flex-start;
+  gap: 8px;
 }
 
 .row-actions button {
@@ -293,7 +373,7 @@ input {
 }
 
 .empty-state {
-  padding: 44px 16px;
+  padding: 46px 16px;
   color: var(--muted);
   text-align: center;
 }
@@ -304,12 +384,11 @@ input {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 16px;
   border-bottom: 1px solid var(--line);
+  padding: 0 16px;
 }
 
 .admin-title h2 {
-  margin: 0;
   font-size: 20px;
   letter-spacing: 0;
 }
@@ -318,19 +397,19 @@ input {
 .admin-row {
   display: grid;
   grid-template-columns: minmax(140px, 1fr) 130px minmax(270px, 1.35fr) minmax(220px, 1fr) 150px;
-  gap: 12px;
-  align-items: center;
   min-height: 58px;
-  padding: 10px 16px;
+  align-items: center;
+  gap: 12px;
   border-bottom: 1px solid var(--line);
+  padding: 10px 16px;
 }
 
 .admin-header {
   min-height: 44px;
-  background: #edf2f8;
-  color: var(--muted);
+  background: #0b1018;
+  color: #9ba8bb;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .admin-row:last-child {
@@ -338,13 +417,13 @@ input {
 }
 
 .admin-row.banned {
-  background: #fff7f7;
+  background: rgba(255, 107, 122, 0.08);
 }
 
 .admin-account {
   display: grid;
-  gap: 3px;
   min-width: 0;
+  gap: 3px;
 }
 
 .admin-account strong,
@@ -363,9 +442,9 @@ input {
 .admin-password,
 .admin-status {
   display: flex;
+  min-width: 0;
   align-items: center;
   gap: 8px;
-  min-width: 0;
 }
 
 .admin-quota input[type="number"] {
@@ -415,8 +494,8 @@ input {
 
 @media (max-width: 760px) {
   .shell {
-    width: min(100% - 20px, 1120px);
-    padding: 10px 0 20px;
+    width: min(100% - 20px, 1160px);
+    padding: 12px 0 20px;
   }
 
   .auth-panel {
@@ -424,32 +503,32 @@ input {
     padding: 20px;
   }
 
-  .file-header {
-    display: none;
+  .brand {
+    align-items: flex-start;
   }
 
+  .file-header,
   .admin-header {
     display: none;
   }
 
   .file-row {
     grid-template-columns: 1fr;
-    gap: 7px;
+    min-height: auto;
+    gap: 8px;
     padding: 14px;
   }
 
   .admin-row {
     grid-template-columns: 1fr;
+    min-height: auto;
     gap: 10px;
     padding: 14px;
   }
 
   .admin-quota,
   .admin-password,
-  .admin-status {
-    flex-wrap: wrap;
-  }
-
+  .admin-status,
   .row-actions {
     flex-wrap: wrap;
   }
